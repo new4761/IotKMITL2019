@@ -25,7 +25,14 @@
 <script src="js/bootstrap.min.js"></script>
 <script src="js/material.min.js"></script>
 <script src="js/ripples.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 <!-- Animate.css -->
 <link rel="stylesheet" href="css/animate.min.css">
 
@@ -138,6 +145,9 @@ var setTimeoffline = function() {
 		$("#status > .content").text("OFFLINE");
 	}, 2 * 60 * 1000);
 }
+function led(){
+	
+}
 </script>
 
 <style>
@@ -183,6 +193,7 @@ var setTimeoffline = function() {
 .nav-tabs {
 	margin-bottom: 20px;
 }
+
 </style>
 </head>
 
@@ -218,7 +229,10 @@ var setTimeoffline = function() {
                <div class="content">???</div>
                <div class="title">Node 1</div>
              </div>
-           </div>
+					 </div>
+					 <div class="col-sm-12">
+						<button type="button" class="btn btn-warning" style="width:100%;">LED</button>
+					</div>
         </div>
       </div>
       <div role="tabpanel" class="tab-pane" id="history">
