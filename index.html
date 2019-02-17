@@ -4,7 +4,19 @@
 <meta charset="utf-8">
 <title>Temperature &amp; Humidity Dashboard | Firebase + ESP8266 </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAb88CdtxWWwxECBR6aVnWPkz4cQWg8qI8",
+    authDomain: "iotfrirebase.firebaseapp.com",
+    databaseURL: "https://iotfrirebase.firebaseio.com",
+    projectId: "iotfrirebase",
+    storageBucket: "iotfrirebase.appspot.com",
+    messagingSenderId: "1050852494671"
+  };
+  firebase.initializeApp(config);
+</script>
 <!-- jQuery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
@@ -28,19 +40,7 @@
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 
-<script src="https://www.gstatic.com/firebasejs/5.8.3/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyAb88CdtxWWwxECBR6aVnWPkz4cQWg8qI8",
-    authDomain: "iotfrirebase.firebaseapp.com",
-    databaseURL: "https://iotfrirebase.firebaseio.com",
-    projectId: "iotfrirebase",
-    storageBucket: "iotfrirebase.appspot.com",
-    messagingSenderId: "1050852494671"
-  };
-  firebase.initializeApp(config);
-</script>
+
 
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -93,10 +93,14 @@ $(document).ready(function(e) {
 	});
 	chart.render();	
 	
-	firebase.initializeApp(config);
 		
 	var logDHT = firebase.database().ref().child("logDHT");
-		
+	var led = database.ref().child("node1");
+	led.on('child_change', function(snapshot) {
+		var text = sanp.val();
+		$("#status > .content").text(text);
+});
+
 	logDHT.on("child_added", function(sanp) {
 		if (!newItems) return;
 		var row = sanp.val();
@@ -132,6 +136,7 @@ $(document).ready(function(e) {
 		var Arow = lastRows;
 		$("#temperature > .content").html(Arow.temperature + " &deg;C");
 		$("#humidity > .content").text(Arow.humidity + " %");
+		$("#status > .content").text();
 		
 		var now = new Date();
 		Arow.time = new Date(Arow.time);
@@ -155,9 +160,10 @@ var setTimeoffline = function() {
 		$("#status > .content").text("OFFLINE");
 	}, 2 * 60 * 1000);
 }
-function led(){
-	
-}
+// function led(){
+// 	var checkey = firebase.database().ref().child('node1')
+// 	return firebase.database().ref().update(updates);
+// }
 </script>
 
 <style>
